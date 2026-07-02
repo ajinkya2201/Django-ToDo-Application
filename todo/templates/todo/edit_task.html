@@ -20,7 +20,7 @@ Edit Task
 
             <div class="card-body">
 
-                <form method="POST">
+                <form method="POST" action="?filter={{ filter }}">  
 
                     {% csrf_token %}
 

@@ -1,0 +1,129 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>{{ title }}</h2>
+
+        <div>
+
+            {% if title != "Completed Tasks" %}
+
+                
+
+            {% endif %}
+
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                ← Back
+            </a>
+
+        </div>
+
+    </div>
+
+    {% if tasks %}
+
+        {% for task in tasks %}
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h4>{{ task.title }}</h4>
+
+                {% if task.description %}
+                    <p>{{ task.description }}</p>
+                {% endif %}
+
+                <p>
+                    <strong>Priority:</strong>
+                    {{ task.priority }}
+                </p>
+                
+                <p>
+                    <strong>Created On:</strong>
+                    {{ task.created_at|date:"d M Y, h:i A" }}
+                </p>
+                
+                {% if task.due_date %}
+                
+                <p>
+                    <strong>Due Date:</strong>
+                    {{ task.due_date|date:"d M Y" }}
+                </p>
+                
+                {% endif %}
+
+                
+
+                <div class="mt-3">
+
+                    {% if task.completed %}
+
+                        <a href="{% url 'toggle_complete' task.id %}"
+                           class="btn btn-secondary btn-sm">
+
+                            Undo
+
+                        </a>
+
+                        <a href="{% url 'delete_task' task.id %}"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'toggle_complete' task.id %}"
+                           class="btn btn-success btn-sm">
+
+                            Complete
+
+                        </a>
+
+                        <a href="{% url 'edit_task' task.id %}"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a href="{% url 'delete_task' task.id %}"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            No tasks available.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,293 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <h1 class="fw-bold mb-0">
+            Django Todo App
+        </h1>
+    
+        <a href="{% url 'add_task' %}" class="btn btn-success">
+            + Add Task
+        </a>
+    
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Total Tasks -->
+        <div class="col-md-3">
+
+            <a href="?filter=all" class="text-decoration-none">
+                <div class="card shadow text-center border-0">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Total Tasks
+                        </h5>
+
+                        <h2 class="text-primary">
+                            {{ total_tasks }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Pending Tasks -->
+        <div class="col-md-3">
+
+            <a href="?filter=pending" class="text-decoration-none">
+                <div class="card shadow text-center border-0">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Pending Tasks
+                        </h5>
+
+                        <h2 class="text-warning">
+                            {{ pending_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Completed Tasks -->
+        <div class="col-md-3">
+
+            <a href="?filter=completed" class="text-decoration-none">
+                <div class="card shadow text-center border-0">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Completed Tasks
+                        </h5>
+
+                        <h2 class="text-success">
+                            {{ completed_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Overdue Tasks -->
+        <div class="col-md-3">
+
+            <a href="?filter=overdue" class="text-decoration-none">
+                <div class="card shadow text-center border-0">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            Overdue Tasks
+                        </h5>
+
+                        <h2 class="text-danger">
+                            {{ overdue_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <form method="GET">
+
+        {% if request.GET.filter %}
+            <input type="hidden" name="filter" value="{{ request.GET.filter }}">
+        {% endif %}
+    
+        <div class="row g-3 align-items-end">
+    
+            <!-- Task Name -->
+            <div class="col-md-4">
+                <label class="form-label fw-bold">
+                    Task Name
+                </label>
+                <input
+                    type="text"
+                    name="task_name"
+                    class="form-control"
+                    placeholder="Search by Task Name"
+                    value="{{ request.GET.task_name }}">
+            </div>
+    
+            <!-- Created Date -->
+            <div class="col-md-3">
+                <label class="form-label fw-bold">
+                    Created Date
+                </label>
+                <input
+                    type="date"
+                    name="created_date"
+                    class="form-control"
+                    value="{{ request.GET.created_date }}">
+            </div>
+    
+            <!-- Due Date -->
+            <div class="col-md-3">
+                <label class="form-label fw-bold">
+                    Due Date
+                </label>
+                <input
+                    type="date"
+                    name="due_date"
+                    class="form-control"
+                    value="{{ request.GET.due_date }}">
+            </div>
+    
+            <!-- Search Button -->
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    Search
+                </button>
+            </div>
+    
+        </div>
+    
+    </form>
+
+</div>
+
+{% if filtered_tasks or request.GET.search %}
+
+<hr class="my-5">
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white">
+
+        <h4 class="mb-0">
+            {{ page_title }}
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        {% for task in filtered_tasks %}
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h5>{{ task.title }}</h5>
+
+                {% if task.description %}
+                    <p>{{ task.description }}</p>
+                {% endif %}
+
+                <p>
+                    <strong>Priority:</strong>
+                    {{ task.priority }}
+                </p>
+
+                <p>
+                    <strong>Created:</strong>
+                    {{ task.created_at|date:"d M Y" }}
+                </p>
+
+                {% if task.due_date %}
+                <p>
+                    <strong>Due:</strong>
+                    {{ task.due_date|date:"d M Y" }}
+                </p>
+                {% endif %}
+
+                {% if task.completed %}
+
+                    <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
+                       class="btn btn-secondary btn-sm">
+
+                        Undo
+
+                    </a>
+
+                    <a href="{% url 'delete_task' task.id %}?filter={{ request.GET.filter }}"
+                       class="btn btn-danger btn-sm">
+
+                        Delete
+
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
+                       class="btn btn-success btn-sm">
+
+                        Complete
+
+                    </a>
+
+                    <a href="{% url 'edit_task' task.id %}?filter={{ request.GET.filter }}"
+                       class="btn btn-warning btn-sm">
+
+                        Edit
+
+                    </a>
+
+                    <a href="{% url 'delete_task' task.id %}?filter={{ request.GET.filter }}"
+                       class="btn btn-danger btn-sm">
+
+                        Delete
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+            {% if request.GET.search %}
+
+                <div class="alert alert-warning">
+
+                    No tasks found matching
+                    <strong>"{{ request.GET.search }}"</strong>.
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
