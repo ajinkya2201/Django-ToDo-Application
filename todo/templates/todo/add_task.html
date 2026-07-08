@@ -10,12 +10,18 @@ Add Task
 
     <div class="col-md-7">
 
-        <div class="card shadow">
+        <div class="card border-0 shadow-lg rounded-4">
 
-            <div class="card-header bg-success text-white">
+            <div class="card-header custom-header text-white rounded-top-4">
 
-                <h3>Add New Task</h3>
-
+                <h3 class="mb-0">
+            
+                    <i class="bi bi-plus-circle me-2"></i>
+            
+                    Add New Task
+            
+                </h3>
+            
             </div>
 
             <div class="card-body">
@@ -23,25 +29,90 @@ Add Task
                 <form method="POST">
 
                     {% csrf_token %}
-
-                    {{ form.as_p }}
-
-                    <button type="submit"
-                            class="btn btn-success">
-
-                        Save Task
-
-                    </button>
-
-                    <a href="{% url 'home' %}"
-                       class="btn btn-secondary">
-
-                        Cancel
-
-                    </a>
-
+                
+                    <div class="mb-3">
+                
+                        <label class="form-label">
+                            <i class="bi bi-card-text text-primary"></i>
+                            Task Title
+                        </label>
+                
+                        {{ form.title }}
+                
+                    </div>
+                
+                    <div class="mb-3">
+                
+                        <label class="form-label">
+                            <i class="bi bi-file-earmark-text text-primary"></i>
+                            Description
+                        </label>
+                
+                        {{ form.description }}
+                
+                    </div>
+                
+                    <div class="row">
+                
+                        <div class="col-md-6 mb-3">
+                
+                            <label class="form-label">
+                                <i class="bi bi-flag-fill text-danger"></i>
+                                Priority
+                            </label>
+                
+                            {{ form.priority }}
+                
+                        </div>
+                
+                        <div class="col-md-6 mb-3">
+                
+                            <label class="form-label">
+                                <i class="bi bi-calendar-event text-success"></i>
+                                Due Date
+                            </label>
+                
+                            {{ form.due_date }}
+                
+                        </div>
+                
+                    </div>
+                
+                    <div class="form-check mb-4">
+                
+                        {{ form.completed }}
+                
+                        <label class="form-check-label ms-2">
+                
+                            Mark as Completed
+                
+                        </label>
+                
+                    </div>
+                
+                    <div class="d-flex gap-2">
+                
+                        <button type="submit"
+                                class="btn btn-success px-4">
+                
+                            <i class="bi bi-check-circle me-2"></i>
+                
+                            Save Task
+                
+                        </button>
+                
+                        <a href="{% url 'home' %}"
+                           class="btn btn-outline-secondary px-4">
+                
+                            <i class="bi bi-x-circle me-2"></i>
+                
+                            Cancel
+                
+                        </a>
+                
+                    </div>
+                
                 </form>
-
             </div>
 
         </div>

@@ -10,13 +10,30 @@ Home
 
     <div class="d-flex justify-content-between align-items-center mb-5">
 
-        <h1 class="fw-bold mb-0">
-            Django Todo App
-        </h1>
+        <div>
+
+            <h1 class="fw-bold mb-1">
+        
+                Welcome Back 👋
+        
+            </h1>
+        
+            <p class="text-muted">
+        
+                Manage your daily tasks efficiently.
+        
+            </p>
+        
+        </div>
     
-        <a href="{% url 'add_task' %}" class="btn btn-success">
-            + Add Task
-        </a>
+        <a href="{% url 'add_task' %}"
+   class="btn btn-success btn-lg px-4 shadow-sm">
+
+    <i class="bi bi-plus-circle me-2"></i>
+
+    Add New Task
+
+</a>
     
     </div>
 
@@ -26,17 +43,21 @@ Home
         <div class="col-md-3">
 
             <a href="?filter=all" class="text-decoration-none">
-                <div class="card shadow text-center border-0">
-
+                <div class="card dashboard-card total-card border-0 h-100">
                     <div class="card-body">
 
                         <h5 class="card-title">
+                            <i class="bi bi-list-check text-primary"></i>
                             Total Tasks
                         </h5>
 
-                        <h2 class="text-primary">
+                        <h2 class="display-5 fw-bold">
                             {{ total_tasks }}
                         </h2>
+                        
+                        <p class="mb-0 small">
+                            Total tasks created
+                        </p>
 
                     </div>
 
@@ -50,17 +71,21 @@ Home
         <div class="col-md-3">
 
             <a href="?filter=pending" class="text-decoration-none">
-                <div class="card shadow text-center border-0">
-
+                <div class="card dashboard-card pending-card border-0 h-100">
                     <div class="card-body">
 
                         <h5 class="card-title">
+                            <i class="bi bi-hourglass-split text-warning"></i>
                             Pending Tasks
                         </h5>
 
-                        <h2 class="text-warning">
+                        <h2 class="display-5 fw-bold">
                             {{ pending_count }}
                         </h2>
+                        
+                        <p class="mb-0 small">
+                            Awaiting completion
+                        </p>
 
                     </div>
 
@@ -74,17 +99,21 @@ Home
         <div class="col-md-3">
 
             <a href="?filter=completed" class="text-decoration-none">
-                <div class="card shadow text-center border-0">
-
+                <div class="card dashboard-card completed-card border-0 h-100">
                     <div class="card-body">
 
                         <h5 class="card-title">
+                            <i class="bi bi-check-circle-fill text-success"></i>
                             Completed Tasks
                         </h5>
 
-                        <h2 class="text-success">
+                        <h2 class="display-5 fw-bold">
                             {{ completed_count }}
                         </h2>
+                        
+                        <p class="mb-0 small">
+                            Successfully finished
+                        </p>
 
                     </div>
 
@@ -98,17 +127,21 @@ Home
         <div class="col-md-3">
 
             <a href="?filter=overdue" class="text-decoration-none">
-                <div class="card shadow text-center border-0">
-
+                <div class="card dashboard-card overdue-card border-0 h-100">
                     <div class="card-body">
 
                         <h5 class="card-title">
+                            <i class="bi bi-exclamation-circle-fill text-danger"></i>
                             Overdue Tasks
                         </h5>
 
-                        <h2 class="text-danger">
+                        <h2 class="display-5 fw-bold">
                             {{ overdue_count }}
                         </h2>
+                        
+                        <p class="mb-0 small">
+                            Need immediate attention
+                        </p>
 
                     </div>
 
@@ -121,61 +154,107 @@ Home
     </div>
 
 
-    <form method="GET">
+    <div class="card-body p-4">
 
-        {% if request.GET.filter %}
-            <input type="hidden" name="filter" value="{{ request.GET.filter }}">
-        {% endif %}
+        <h4 class="mb-4">
     
-        <div class="row g-3 align-items-end">
+            <i class="bi bi-funnel-fill text-primary me-2"></i>
     
-            <!-- Task Name -->
-            <div class="col-md-4">
-                <label class="form-label fw-bold">
-                    Task Name
-                </label>
-                <input
-                    type="text"
-                    name="task_name"
-                    class="form-control"
-                    placeholder="Search by Task Name"
-                    value="{{ request.GET.task_name }}">
-            </div>
+            Search & Filter Tasks
     
-            <!-- Created Date -->
-            <div class="col-md-3">
-                <label class="form-label fw-bold">
-                    Created Date
-                </label>
-                <input
-                    type="date"
-                    name="created_date"
-                    class="form-control"
-                    value="{{ request.GET.created_date }}">
-            </div>
+        </h4>
     
-            <!-- Due Date -->
-            <div class="col-md-3">
-                <label class="form-label fw-bold">
-                    Due Date
-                </label>
-                <input
-                    type="date"
-                    name="due_date"
-                    class="form-control"
-                    value="{{ request.GET.due_date }}">
-            </div>
+        <form method="GET">
     
-            <!-- Search Button -->
-            <div class="col-md-2">
-                <button class="btn btn-primary w-100">
-                    Search
-                </button>
-            </div>
+            {% if request.GET.filter %}
+            <input type="hidden"
+                   name="filter"
+                   value="{{ request.GET.filter }}">
+            {% endif %}
     
-        </div>
+            <div class="row g-3">
     
-    </form>
+                <div class="col-md-4">
+    
+                    <label class="form-label fw-semibold">
+    
+                        <i class="bi bi-search"></i>
+    
+                        Task Name
+    
+                    </label>
+    
+                    <input type="text"
+                           name="search"
+                           class="form-control"
+                           placeholder="Search task..."
+                           value="{{ request.GET.search }}">
+    
+                </div>
+    
+                <div class="col-md-3">
+    
+                    <label class="form-label fw-semibold">
+    
+                        <i class="bi bi-calendar-event"></i>
+    
+                        Created Date
+    
+                    </label>
+    
+                    <input type="date"
+                           name="created_date"
+                           class="form-control"
+                           value="{{ request.GET.created_date }}">
+    
+                </div>
+    
+                <div class="col-md-3">
+    
+                    <label class="form-label fw-semibold">
+    
+                        <i class="bi bi-clock-history"></i>
+    
+                        Due Date
+    
+                    </label>
+    
+                    <input type="date"
+                           name="due_date"
+                           class="form-control"
+                           value="{{ request.GET.due_date }}">
+    
+                </div>
+    
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <div class="d-grid gap-2 w-100">
+                
+                        <button type="submit"
+                                class="btn btn-primary">
+                
+                            <i class="bi bi-search me-1"></i>
+                
+                            Search
+                
+                        </button>
+                
+                        <a href="{% url 'home' %}"
+                           class="btn btn-outline-secondary">
+                
+                            <i class="bi bi-arrow-clockwise me-1"></i>
+                
+                            Reset
+                
+                        </a>
+                
+                    </div>
+                
+                </div>
+    
+        </form>
+    
+    </div>
 
 </div>
 
@@ -183,87 +262,144 @@ Home
 
 <hr class="my-5">
 
-<div class="card shadow">
+<div class="card border-0 shadow-lg rounded-4">
 
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-primary text-white rounded-top-4">
 
         <h4 class="mb-0">
+            <i class="bi bi-list-task me-2"></i>
             {{ page_title }}
         </h4>
 
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-4">
 
         {% for task in filtered_tasks %}
 
-        <div class="card mb-3">
+        <div class="card task-card mb-4 border-0 shadow-sm">
 
             <div class="card-body">
 
-                <h5>{{ task.title }}</h5>
+                <div class="d-flex justify-content-between align-items-start">
 
-                {% if task.description %}
-                    <p>{{ task.description }}</p>
-                {% endif %}
+                    <div>
 
-                <p>
-                    <strong>Priority:</strong>
-                    {{ task.priority }}
-                </p>
+                        <h4 class="fw-bold mb-2">
+                            {{ task.title }}
+                        </h4>
 
-                <p>
-                    <strong>Created:</strong>
-                    {{ task.created_at|date:"d M Y" }}
-                </p>
+                        {% if task.description %}
 
-                {% if task.due_date %}
-                <p>
-                    <strong>Due:</strong>
-                    {{ task.due_date|date:"d M Y" }}
-                </p>
-                {% endif %}
+                        <p class="text-muted mb-3">
+                            {{ task.description }}
+                        </p>
 
-                {% if task.completed %}
+                        {% endif %}
 
-                    <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
-                       class="btn btn-secondary btn-sm">
+                    </div>
 
-                        Undo
+                    <div>
 
-                    </a>
+                        {% if task.priority == "High" %}
+
+                            <span class="badge bg-danger fs-6">
+                                High
+                            </span>
+
+                        {% elif task.priority == "Medium" %}
+
+                            <span class="badge bg-warning text-dark fs-6">
+                                Medium
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-success fs-6">
+                                Low
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+
+                        <i class="bi bi-calendar-event text-primary"></i>
+
+                        <strong>Created:</strong>
+
+                        {{ task.created_at|date:"d M Y" }}
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        {% if task.due_date %}
+
+                        <i class="bi bi-clock-history text-danger"></i>
+
+                        <strong>Due:</strong>
+
+                        {{ task.due_date|date:"d M Y" }}
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    {% if task.completed %}
+
+                        <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
+                           class="btn btn-secondary">
+
+                            <i class="bi bi-arrow-counterclockwise"></i>
+
+                            Undo
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
+                           class="btn btn-success">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            Complete
+
+                        </a>
+
+                        <a href="{% url 'edit_task' task.id %}?filter={{ request.GET.filter }}"
+                           class="btn btn-warning">
+
+                            <i class="bi bi-pencil-square"></i>
+
+                            Edit
+
+                        </a>
+
+                    {% endif %}
 
                     <a href="{% url 'delete_task' task.id %}?filter={{ request.GET.filter }}"
-                       class="btn btn-danger btn-sm">
+                       class="btn btn-danger">
+
+                        <i class="bi bi-trash"></i>
 
                         Delete
 
                     </a>
 
-                {% else %}
-
-                    <a href="{% url 'toggle_complete' task.id %}?filter={{ request.GET.filter }}"
-                       class="btn btn-success btn-sm">
-
-                        Complete
-
-                    </a>
-
-                    <a href="{% url 'edit_task' task.id %}?filter={{ request.GET.filter }}"
-                       class="btn btn-warning btn-sm">
-
-                        Edit
-
-                    </a>
-
-                    <a href="{% url 'delete_task' task.id %}?filter={{ request.GET.filter }}"
-                       class="btn btn-danger btn-sm">
-
-                        Delete
-
-                    </a>
-
-                {% endif %}
+                </div>
 
             </div>
 
@@ -271,16 +407,23 @@ Home
 
         {% empty %}
 
-            {% if request.GET.search %}
+        {% if request.GET.search %}
 
-                <div class="alert alert-warning">
+        <div class="alert alert-warning text-center">
 
-                    No tasks found matching
-                    <strong>"{{ request.GET.search }}"</strong>.
+            <h5>
 
-                </div>
+                <i class="bi bi-search"></i>
 
-            {% endif %}
+                No tasks found matching
+
+                <strong>"{{ request.GET.search }}"</strong>
+
+            </h5>
+
+        </div>
+
+        {% endif %}
 
         {% endfor %}
 
@@ -289,5 +432,4 @@ Home
 </div>
 
 {% endif %}
-
 {% endblock %}

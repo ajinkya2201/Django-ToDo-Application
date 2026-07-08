@@ -1,0 +1,247 @@
+.dashboard-card{
+    border-radius:18px;
+    transition:all .3s ease;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.dashboard-card .card-title{
+    font-size:18px;
+    font-weight:600;
+    color:#555;
+}
+
+.dashboard-card h2{
+    font-size:34px;
+    font-weight:bold;
+}
+
+.task-card{
+    border-radius:18px;
+    transition:0.3s;
+}
+
+.task-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.task-card h4{
+    font-weight:700;
+}
+.task-card .card-body{
+    padding:28px;
+}
+
+.badge{
+    padding:8px 14px;
+}
+
+.btn{
+    border-radius:10px;
+}
+
+/* Dashboard Card Colors */
+
+.total-card{
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    color:white;
+}
+
+.pending-card{
+    background:linear-gradient(135deg,#f6d365,#fda085);
+    color:white;
+}
+
+.completed-card{
+    background:linear-gradient(135deg,#43e97b,#38f9d7);
+    color:white;
+}
+
+.overdue-card{
+    background:linear-gradient(135deg,#fa709a,#fee140);
+    color:white;
+}
+
+/* Keep text white */
+
+.dashboard-card .card-title,
+.dashboard-card h2{
+    color:white;
+}
+
+.dashboard-card i{
+    color:white;
+    margin-right:8px;
+}
+
+/* Navbar */
+
+.custom-navbar{
+    background:linear-gradient(135deg,#1e293b,#0f172a);
+    padding:15px 0;
+}
+
+.navbar-brand{
+    letter-spacing:1px;
+}
+
+.navbar-brand i{
+    font-size:30px;
+}
+
+.form-control,
+.form-select{
+
+    border-radius:12px;
+
+    min-height:48px;
+
+    box-shadow:none;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 10px rgba(37,99,235,.2);
+
+}
+
+.custom-header{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+}
+
+
+.form-control,
+.form-select{
+    border-radius:12px;
+    min-height:48px;
+}
+
+textarea.form-control{
+    min-height:130px;
+    resize:none;
+}
+
+.form-label{
+    font-weight:600;
+}
+
+.form-check-input{
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+
+.btn{
+    border-radius:10px;
+    font-weight:600;
+}
+
+
+.form-control,
+.form-select{
+    border-radius:12px;
+    padding:12px;
+    min-height:48px;
+}
+
+textarea.form-control{
+    min-height:150px;
+    resize:none;
+}
+
+.form-label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-check-input{
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+
+.form-check-label{
+    font-weight:500;
+}
+
+.btn{
+    border-radius:12px;
+    font-weight:600;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+
+/* Search Card */
+
+.search-card{
+
+    border-radius:20px;
+
+}
+
+.search-card h4{
+
+    font-weight:700;
+
+}
+
+.search-card .form-control{
+
+    height:48px;
+
+    border-radius:12px;
+
+}
+
+.search-card button{
+
+    height:48px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+}
+
+/* Action Buttons */
+
+.task-card .btn{
+    min-width:120px;
+    height:42px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.task-card .btn:hover{
+    transform:translateY(-2px);
+}
+
+.task-card .card-body{
+    padding:20px;
+}
+
+.search-card .form-control{
+    height:52px;
+    border-radius:14px;
+}
+
+.search-card .btn{
+    height:52px;
+    border-radius:14px;
+}

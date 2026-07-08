@@ -82,7 +82,7 @@ def home(request):
     if due_date:
         filtered_tasks = filtered_tasks.filter(
             due_date=due_date
-        )
+        )   
 
     print("Filter:", filter_type)
     print("Task Name:", task_name)
